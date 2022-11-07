@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  //
+
+  // Q: Find the pairs of numbers whose sum is 0 ?
+  //    Note: Solve this problem by object nd also find the index number of those pair whose sum is 0 .
+
+  // Step 1. Create  an arrow function and pass a parameter as given input.
+  // Step 2. Create an empty object for showing the result.
+  // Step 3. Ittrate a loop on given array then hold a value in new variable.
+  // Step 4. Write hasOwnProperty to check that value is present in object or not.
+  // Step 5. If a value is in object so continue,if it is not in object so assign that in obj with their index.
+  // Step 6. Get  a reverse value of that number nd then check, that number is in object or not.
+  // Step 7. If it is in object so print that value with their index.
+
+  // With Single Loop :
+
+  const arr1 = [1, 2, -1, -2, -3];
+
+  const getPairSumZero = (arr) => {
+    const result = {};
+    for (let i = 0; i < arr.length; i++) {
+      const current = arr[i];
+      if (result.hasOwnProperty(current)) {
+        continue;
+      }
+      result[current] = i;
+
+      const findReverseKey = current > 0 ? `-${current}` : Math.abs(current);
+      if (result.hasOwnProperty(findReverseKey)) {
+        return {
+          [result[current]]: current,
+          [result[findReverseKey]]: findReverseKey,
+        };
+      }
+    }
+  };
+  console.log("getPairSumZero :", getPairSumZero(arr1));
+
+  //---------------------------------------------------------------------------------------------------------------
+
+  // With Normal Two Loop :
+
+  const newArr = [1, 2, 3, -2, 1, -1];
+
+  const findPairSumZero = (newArr) => {
+    const result = {};
+    for (let i = 0; i < newArr.length; i++) {
+      for (let j = i + 1; j < newArr.length; j++) {
+        if (newArr[i] + newArr[j] === 0) {
+          result[i] = newArr[i];
+          result[j] = newArr[j];
+          return result;
+        }
+      }
+    }
+  };
+  console.log("findPairSumZero :", findPairSumZero(newArr));
+
+  //------------------------------------------------------------------------------------------------------------------
+
+  // With of loop :
+
+  const arr = [1, 23, -1, 2, -2];
+  function getSumPairZero(arr) {
+    for (let number of arr) {
+      for (let i = 0; i < arr.length; i++) {
+        if (number + arr[i] === 0) {
+          return [number, arr[i]];
+        }
+      }
+    }
+  }
+  console.log("getSumPairZero :", getSumPairZero(arr));
+</script>
